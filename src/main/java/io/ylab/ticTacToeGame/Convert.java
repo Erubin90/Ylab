@@ -1,4 +1,4 @@
-package io.ylab.lesson2.ticTacToeGame;
+package io.ylab.ticTacToeGame;
 
 import java.util.HashMap;
 import java.util.Map;

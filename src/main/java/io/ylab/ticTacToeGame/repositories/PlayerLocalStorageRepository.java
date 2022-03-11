@@ -1,8 +1,8 @@
-package io.ylab.lesson2.ticTacToeGame.repositories;
+package io.ylab.ticTacToeGame.repositories;
 
-import io.ylab.lesson2.ticTacToeGame.Convert;
-import io.ylab.lesson2.ticTacToeGame.objects.Player;
-import io.ylab.lesson2.ticTacToeGame.objects.Person;
+import io.ylab.ticTacToeGame.Convert;
+import io.ylab.ticTacToeGame.objects.Player;
+import io.ylab.ticTacToeGame.objects.Person;
 
 import java.io.File;
 import java.io.IOException;

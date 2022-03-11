@@ -1,6 +1,6 @@
-package io.ylab.lesson2.ticTacToeGame.objects;
+package io.ylab.ticTacToeGame.objects;
 
-import io.ylab.lesson2.ticTacToeGame.game.Symbol;
+import io.ylab.ticTacToeGame.game.Symbol;
 
 public class Move {
     private int row;

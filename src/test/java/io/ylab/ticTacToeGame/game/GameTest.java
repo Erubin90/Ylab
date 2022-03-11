@@ -1,4 +1,4 @@
-package io.ylab.lesson2.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.game;
 
 import org.junit.jupiter.api.Test;
 

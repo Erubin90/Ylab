@@ -1,7 +1,7 @@
-package io.ylab.lesson2.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.game;
 
-import io.ylab.lesson2.ticTacToeGame.objects.Move;
-import io.ylab.lesson2.ticTacToeGame.objects.Player;
+import io.ylab.ticTacToeGame.objects.Move;
+import io.ylab.ticTacToeGame.objects.Player;
 
 import java.util.List;
 import java.util.Map;

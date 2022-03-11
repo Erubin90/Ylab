@@ -1,9 +1,9 @@
-package io.ylab.lesson2.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.game;
 
-import io.ylab.lesson2.ticTacToeGame.objects.Move;
-import io.ylab.lesson2.ticTacToeGame.objects.Player;
-import io.ylab.lesson2.ticTacToeGame.objects.Bot;
-import io.ylab.lesson2.ticTacToeGame.repositories.PlayerLocalStorageRepository;
+import io.ylab.ticTacToeGame.objects.Move;
+import io.ylab.ticTacToeGame.objects.Player;
+import io.ylab.ticTacToeGame.objects.Bot;
+import io.ylab.ticTacToeGame.repositories.PlayerLocalStorageRepository;
 
 import java.util.*;
 

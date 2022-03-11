@@ -1,9 +1,9 @@
-package io.ylab.lesson2.ticTacToeGame.objects;
+package io.ylab.ticTacToeGame.objects;
 
-import io.ylab.lesson2.ticTacToeGame.game.Symbol;
-import io.ylab.lesson2.ticTacToeGame.game.Game;
-import io.ylab.lesson2.ticTacToeGame.game.Message;
-import io.ylab.lesson2.ticTacToeGame.game.ResultGame;
+import io.ylab.ticTacToeGame.game.Symbol;
+import io.ylab.ticTacToeGame.game.Game;
+import io.ylab.ticTacToeGame.game.Message;
+import io.ylab.ticTacToeGame.game.ResultGame;
 
 import java.util.Scanner;
 

@@ -1,6 +1,6 @@
-package io.ylab.lesson2.ticTacToeGame;
+package io.ylab.ticTacToeGame;
 
-import io.ylab.lesson2.ticTacToeGame.game.Game;
+import io.ylab.ticTacToeGame.game.Game;
 public class MainClass {
 
     public static void main(String[] args) {
