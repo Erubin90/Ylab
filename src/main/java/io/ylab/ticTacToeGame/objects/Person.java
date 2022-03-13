@@ -19,7 +19,7 @@ public class Person extends Player {
     }
 
     @Override
-    public Move move(Scanner scanner, char[][] matrix) {
+    public Step move(Scanner scanner, char[][] matrix) {
         int row;
         int col;
         while (true) {
@@ -31,7 +31,7 @@ public class Person extends Player {
                 col = Integer.parseInt(nums[1]) - 1;
                 char c = matrix[row][col];
                 if (c == 0)
-                    return new Move(row, col, symbol);
+                    return new Step(row, col, symbol);
                 else
                     Message.printErrorMove();
             }

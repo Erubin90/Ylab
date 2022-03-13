@@ -1,9 +1,9 @@
 package io.ylab.ticTacToeGame.objects;
 
-import io.ylab.ticTacToeGame.game.Symbol;
-import io.ylab.ticTacToeGame.game.Game;
+import io.ylab.ticTacToeGame.objects.enums.Symbol;
+import io.ylab.ticTacToeGame.game.PersonGame;
 import io.ylab.ticTacToeGame.game.Message;
-import io.ylab.ticTacToeGame.game.ResultGame;
+import io.ylab.ticTacToeGame.objects.enums.ResultGame;
 
 import java.util.Scanner;
 
@@ -15,10 +15,14 @@ public class Bot extends Player {
         super(player.getName(), player.getPoint());
     }
 
+    public Bot() {
+
+    }
+
     @Override
-    public Move move(Scanner scanner, char[][] matrix) {
+    public Step move(Scanner scanner, char[][] matrix) {
         int bestVal = -1000;
-        Move move = new Move(-1, -1, this.symbol);
+        Step step = new Step(-1, -1, this.symbol);
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
                 if (matrix[row][col] == 0) {
@@ -27,14 +31,14 @@ public class Bot extends Player {
                     matrix[row][col] = 0;
                     if (moveVal > bestVal) {
                         bestVal = moveVal;
-                        move.setRow(row);
-                        move.setCol(col);
+                        step.setRow(row);
+                        step.setCol(col);
                     }
                 }
             }
         }
-        Message.printBotMove(this.name, move);
-        return move;
+        Message.printBotMove(this.name, step);
+        return step;
     }
 
     private int minMax(char[][] matrix, int depth, Boolean isMax) {
@@ -78,7 +82,7 @@ public class Bot extends Player {
     }
 
     private int evaluate(char[][] matrix) {
-        ResultGame resultGame = Game.checkWin(matrix);
+        ResultGame resultGame = PersonGame.checkWin(matrix);
         switch (resultGame) {
             case WIN:
                 return resultGame.getSymbol() == this.symbol ? 10 : -10;
@@ -98,7 +102,6 @@ public class Bot extends Player {
         }
         return false;
     }
-
 
     @Override
     public void setSymbol(Symbol symbol) {

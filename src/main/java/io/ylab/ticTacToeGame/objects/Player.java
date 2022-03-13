@@ -1,11 +1,12 @@
 package io.ylab.ticTacToeGame.objects;
 
-
-import io.ylab.ticTacToeGame.game.Symbol;
+import io.ylab.ticTacToeGame.objects.enums.Symbol;
 
 import java.util.Scanner;
 
 public abstract class Player {
+    protected int id;
+
     protected String name;
 
     protected Symbol symbol;
@@ -13,7 +14,6 @@ public abstract class Player {
     protected int point;
 
     public Player() {
-
     }
 
     public Player(String name) {
@@ -26,7 +26,7 @@ public abstract class Player {
         this.point = point;
     }
 
-    public abstract Move move(Scanner scanner, char[][] matrix);
+    public abstract Step move(Scanner scan, char[][] matrix);
 
     public void addPoint() {
         point++;
@@ -50,5 +50,13 @@ public abstract class Player {
 
     public int getPoint() {
         return point;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
