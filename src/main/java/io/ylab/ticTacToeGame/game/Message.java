@@ -1,8 +1,9 @@
 package io.ylab.ticTacToeGame.game;
 
-import io.ylab.ticTacToeGame.objects.Move;
+import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.Player;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -15,14 +16,15 @@ public class Message {
     }
 
     public static void printPlayWithBot() {
-        System.out.println("Играть с другом или ботом?:\n" +
+        System.out.println("Меню:\n" +
                 "1 - играть с другом\n" +
-                "2 - играть с ботом");
+                "2 - играть с ботом\n" +
+                "3 - запустить симуляцию");
         System.out.print(dash);
     }
 
     public static void printErrorAnswer() {
-        System.out.println("Я не предоставлял такой вариант");
+        System.out.println("Неверный вариант");
         System.out.print(dash);
     }
 
@@ -78,8 +80,8 @@ public class Message {
         System.out.print(name + dash);
     }
 
-    public static void printBotMove(String name, Move move) {
-        System.out.println(name + dash + (move.getRow() + 1) + (move.getCol() + 1));
+    public static void printBotMove(String name, Step step) {
+        System.out.println(name + dash + (step.getRow() + 1) + (step.getCol() + 1));
     }
 
     public static void printErrorMove() {
@@ -100,10 +102,19 @@ public class Message {
         }
     }
 
-    public static void printContinuePlay() {
-        System.out.println("Повторим?\n" +
-                "1. Да, повторим\n" +
-                "2. Выйти из игры");
+    public static void printContinuePersonGame() {
+        System.out.println("Меню:\n" +
+                "1. Сыграть еще один раунд\n" +
+                "2. Создать новую игру\n" +
+                "3. Выйти из игры");
+        System.out.print(dash);
+    }
+
+    public static void printContinueSimulationGame() {
+        System.out.println("Меню:\n" +
+                "1. Повторить симуляцию\n" +
+                "2. Создать новую игру\n" +
+                "3. Выйти из игры");
         System.out.print(dash);
     }
 
@@ -112,5 +123,22 @@ public class Message {
             System.out.print(pattern);
         }
         System.out.println();
+    }
+
+    public static void printSelectFileForSimulation() {
+        System.out.println("Введите номер файла для симуляции игры, либо укажите путь к файлу");
+    }
+
+    public static void printFileList(List<File> files) {
+        for (int i = 0; i < files.size(); i++)
+            System.out.println((i + 1) + ". " + files.get(i).getName());
+    }
+
+    public static void printErrorFile() {
+        System.out.println("Неправильный путь");
+    }
+
+    public static void printDash() {
+        System.out.print(dash);
     }
 }
