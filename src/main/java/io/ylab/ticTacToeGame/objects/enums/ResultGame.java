@@ -1,9 +1,9 @@
-package io.ylab.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.objects.enums;
 
 public enum ResultGame {
-    WIN(),
-    DRAW(),
-    NEXT_MOVE();
+    WIN,
+    DRAW,
+    NEXT_MOVE;
 
     private Symbol symbol;
 

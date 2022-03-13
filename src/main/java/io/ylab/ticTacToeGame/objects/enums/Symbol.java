@@ -1,4 +1,4 @@
-package io.ylab.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.objects.enums;
 
 public enum Symbol {
     X('X'),
@@ -18,7 +18,7 @@ public enum Symbol {
         return mySymbol == Symbol.X ? Symbol.O : Symbol.X;
     }
 
-    public static Symbol getSymbol(char sing) {
-        return sing == 'X' ? Symbol.X : Symbol.O;
+    public static Symbol getSymbol(String sing) {
+        return sing.equals("X") ? Symbol.X : Symbol.O;
     }
 }
