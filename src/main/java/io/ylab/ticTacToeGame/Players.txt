@@ -1,2 +1,4 @@
+Bot : 2
+Magomedamin : 2
 Halper : 0
-Magomedamin : 1
+Healper : 0
