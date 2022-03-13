@@ -4,7 +4,6 @@ import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,9 +30,9 @@ public class SimulationGame extends Game {
             Message.printMatrix(matrix);
             Message.printSeparator("-", countPattern);
         }
-        Player winPlayer = players.get(2);
+        Player winPlayer = players.size() == 3 ? players.get(2) : null;
 
-        if (winPlayer.getName() != null) {
+        if (winPlayer != null) {
             String winName = winPlayer.getName();
             Message.printWinPlayer(winName);
         }
@@ -41,17 +40,5 @@ public class SimulationGame extends Game {
             Message.printDrawPlayers();
         Message.printContinueSimulationGame();
         return this.isContinueGame(scan);
-    }
-
-    @Override
-    public String toString() {
-        return "SimulationGame{" +
-                "typeGame=" + typeGame +
-                ", players=" + players +
-                ", scope=" + scope +
-                ", matrix=" + Arrays.toString(matrix) +
-                ", countPattern=" + countPattern +
-                ", steps=" + steps +
-                '}';
     }
 }

@@ -31,7 +31,7 @@ public class Person extends Player {
                 col = Integer.parseInt(nums[1]) - 1;
                 char c = matrix[row][col];
                 if (c == 0)
-                    return new Step(row, col, symbol);
+                    return new Step(row, col, this);
                 else
                     Message.printErrorMove();
             }

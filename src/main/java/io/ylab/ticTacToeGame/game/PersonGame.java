@@ -7,6 +7,7 @@ import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
 import io.ylab.ticTacToeGame.objects.enums.ResultGame;
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
 import io.ylab.ticTacToeGame.objects.enums.TypeGame;
+import io.ylab.ticTacToeGame.parser.GameToXMLParser;
 import io.ylab.ticTacToeGame.repositories.PlayerLocalStorageRepository;
 
 import java.util.*;
@@ -14,6 +15,8 @@ import java.util.*;
 public class PersonGame extends Game {
 
     private final PlayerLocalStorageRepository storage;
+
+    private final GameToXMLParser parser;
 
     public PersonGame(Scanner scan, TypeGame typeGame) {
         super();
@@ -23,6 +26,7 @@ public class PersonGame extends Game {
         this.players = new ArrayList<>();
         this.steps = new ArrayList<>();
         this.storage = new PlayerLocalStorageRepository();
+        this.parser = new GameToXMLParser();
     }
 
     //Метод в котором прописана логика игры
@@ -134,14 +138,13 @@ public class PersonGame extends Game {
 
         Message.printStartGame(players);
         Message.printSeparator("-", countPattern);
-
+        int num = 1;
         while (resultGame == ResultGame.NEXT_MOVE) {
-            int num = 1;
             for (Player player : players) {
                 if (resultGame == ResultGame.NEXT_MOVE) {
                     Step step = player.move(scan, matrix);
                     step.setNum(num);
-                    step.setPlayer(player);
+                    steps.add(step);
                     int row = step.getRow();
                     int col = step.getCol();
                     char sing = step.getSymbol().getSing();
@@ -172,8 +175,10 @@ public class PersonGame extends Game {
         else
             Message.printDrawPlayers();
         storage.saveAll(players);
+        parser.write(players, winPlayer, steps);
         Message.printGameScope(scope);
         Message.printSeparator("-", countPattern);
+
         Message.printContinuePersonGame();
         return this.isContinueGame(scan);
     }

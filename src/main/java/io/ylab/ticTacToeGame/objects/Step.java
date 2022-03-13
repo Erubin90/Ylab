@@ -12,15 +12,13 @@ public class Step {
 
     private int col;
 
-    private Symbol symbol;
-
     public Step() {
     }
 
-    public Step(int row, int col, Symbol symbol) {
+    public Step(int row, int col, Player player) {
         this.row = row;
         this.col = col;
-        this.symbol = symbol;
+        this.player = player;
     }
 
     public int getRow() {
@@ -40,11 +38,7 @@ public class Step {
     }
 
     public Symbol getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(Symbol symbol) {
-        this.symbol = symbol;
+        return player.getSymbol();
     }
 
     public Player getPlayer() {
@@ -70,7 +64,6 @@ public class Step {
                 ", num=" + num +
                 ", row=" + row +
                 ", col=" + col +
-                ", symbol=" + symbol +
                 '}';
     }
 }

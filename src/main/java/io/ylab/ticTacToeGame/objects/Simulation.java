@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class Simulation extends Player {
 
     public Simulation() {
+        super();
+    }
+
+    public Simulation(String name) {
+        super(name);
     }
 
     @Override

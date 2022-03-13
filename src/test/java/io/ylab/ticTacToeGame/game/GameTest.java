@@ -1,5 +1,6 @@
 package io.ylab.ticTacToeGame.game;
 
+import io.ylab.ticTacToeGame.objects.enums.ResultGame;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

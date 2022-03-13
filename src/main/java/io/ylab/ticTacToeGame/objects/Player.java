@@ -13,17 +13,25 @@ public abstract class Player {
 
     protected int point;
 
+    private static int count = 0;
+
     public Player() {
+        count++;
+        this.id = count;
     }
 
     public Player(String name) {
         this.name = name;
         this.point = 0;
+        count++;
+        this.id = count;
     }
 
     public Player(String name, int point) {
         this.name = name;
         this.point = point;
+        count++;
+        this.id = count;
     }
 
     public abstract Step move(Scanner scan, char[][] matrix);

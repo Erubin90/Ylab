@@ -24,8 +24,6 @@ public class XMLToSimulationGameParser {
 
     protected File file;
 
-    protected XMLEventReader reader;
-
     public XMLToSimulationGameParser() {
     }
 
@@ -40,6 +38,7 @@ public class XMLToSimulationGameParser {
     }
 
     public SimulationGame read() throws FileNotFoundException{
+        Player player;
         Step step;
         List<Player> players = new ArrayList<>();
         List<Step> steps = new ArrayList<>();
@@ -48,81 +47,84 @@ public class XMLToSimulationGameParser {
             инициализируем reader и скармливаем ему xml файл
             проходим по всем элементам xml файла
             */
-            this.reader = INPUT_FACTORY.createXMLEventReader(new FileInputStream(file.getAbsolutePath()));
+            XMLEventReader reader = INPUT_FACTORY.createXMLEventReader(new FileInputStream(file.getAbsolutePath()), "windows-1251");
             while (reader.hasNext()) {
                 // получаем событие (элемент) и разбираем его по атрибутам
                 XMLEvent xmlEvent = reader.nextEvent();
                 if (xmlEvent.isStartElement()) {
                     StartElement startElement = xmlEvent.asStartElement();
-                    String localPart = startElement.getName().getLocalPart();
-                    // получаем Player
-                    if (localPart.equals("Player")){
-                        addPlayer(startElement, players);
-                    }
-                    // получаем Step
-                    else if (localPart.equals("Step")){
-                        step = new Step();
-                        String numAtt = startElement
-                                .getAttributeByName(new QName("num"))
-                                .getValue();
-                        String playerIdAtt = startElement
-                                .getAttributeByName(new QName("playerId"))
-                                .getValue();
-                        xmlEvent = reader.nextEvent();
-                        var move = xmlEvent.asCharacters().toString();
-                        if (numAtt != null)
-                            step.setNum(Integer.parseInt(numAtt));
-                        if (playerIdAtt != null) {
-                            int playerId = Integer.parseInt(playerIdAtt);
-                            Player player = getPlayerById(players, playerId);
-                            step.setPlayer(player);
-                            step.setSymbol(player.getSymbol());
-                        }
-                        if (move != null) {
-                            if (move.matches("\\d")) {
-                                int intMove = Integer.parseInt(move);
-                                intMove--;
-                                int row = intMove / 3;
-                                int col = intMove - row * 3;
-                                step.setRow(row);
-                                step.setCol(col);
+                    switch (startElement.getName().getLocalPart()) {
+                        // получаем Player
+                        case "Player":
+                            player = getPlayer(startElement);
+                            players.add(player);
+                            break;
+                        // получаем Step
+                        case "Step":
+                            step = new Step();
+                            String numAtt = startElement
+                                    .getAttributeByName(new QName("num"))
+                                    .getValue();
+                            String playerIdAtt = startElement
+                                    .getAttributeByName(new QName("playerId"))
+                                    .getValue();
+                            xmlEvent = reader.nextEvent();
+                            var move = xmlEvent.asCharacters().toString();
+                            if (numAtt != null)
+                                step.setNum(Integer.parseInt(numAtt));
+                            if (playerIdAtt != null) {
+                                int playerId = Integer.parseInt(playerIdAtt);
+                                player = getPlayerById(players, playerId);
+                                step.setPlayer(player);
                             }
-                            else if (move.matches("\\d{2}")) {
-                                String[] rowCol = move.split("");
-                                int row = Integer.parseInt(rowCol[0]);
-                                int col = Integer.parseInt(rowCol[1]);
-                                step.setRow(row);
-                                step.setCol(col);
+                            if (move != null) {
+                                if (move.matches("\\d")) {
+                                    int intMove = Integer.parseInt(move);
+                                    intMove--;
+                                    int row = intMove / 3;
+                                    int col = intMove - row * 3;
+                                    step.setRow(row);
+                                    step.setCol(col);
+                                } else if (move.matches("\\d{2}")) {
+                                    String[] rowCol = move.split("");
+                                    int row = Integer.parseInt(rowCol[0]);
+                                    int col = Integer.parseInt(rowCol[1]);
+                                    step.setRow(row);
+                                    step.setCol(col);
+                                } else if (move.matches("\\d[|\\\\/;:,.\t ]+\\d")) {
+                                    String[] rowCol = move.split("[|\\\\/;:,.\t ]");
+                                    int row = Integer.parseInt(rowCol[0]);
+                                    int col = Integer.parseInt(rowCol[1]);
+                                    step.setRow(row);
+                                    step.setCol(col);
+                                }
                             }
-                            else if(move.matches("\\d[|\\\\/;:,.\t ]+\\d")) {
-                                String[] rowCol = move.split("[|\\\\/;:,.\t ]");
-                                int row = Integer.parseInt(rowCol[0]);
-                                int col = Integer.parseInt(rowCol[1]);
-                                step.setRow(row);
-                                step.setCol(col);
+                            steps.add(step);
+                            break;
+                        //Добавляем игрока победителя в конец списка игроков
+                        case "GameResult":
+                            xmlEvent = reader.nextEvent();
+                            if (xmlEvent.isStartElement()) {
+                                startElement = xmlEvent.asStartElement();
+                                player = getPlayer(startElement);
+                                if (player.getName() != null)
+                                    players.add(player);
                             }
-                        }
-                        steps.add(step);
-                    }
-                    //Добавляем игрока победителя в конец списка игроков
-                    else if (localPart.equals("GameResult")){
-                        xmlEvent = reader.nextEvent();
-                        if (xmlEvent.isStartElement()) {
-                            startElement = xmlEvent.asStartElement();
-                            addPlayer(startElement, players);
-                        }
+                            break;
                     }
                 }
             }
+            reader.close();
         }
         catch (XMLStreamException exc) {
             exc.printStackTrace();
         }
+
         return new SimulationGame(players, steps);
     }
 
-    private void addPlayer(StartElement startElement, List<Player> players) {
-        Simulation player = new Simulation();
+    private Player getPlayer(StartElement startElement) {
+        Player player = new Simulation();
         Attribute idAtt = startElement.getAttributeByName(new QName("id"));
         Attribute nameAtt = startElement.getAttributeByName(new QName("name"));
         Attribute symbolAtt = startElement.getAttributeByName(new QName("symbol"));
@@ -137,7 +139,7 @@ public class XMLToSimulationGameParser {
             else if (symbolAtt.getValue().matches("[OoОо0]"))
                 player.setSymbol(Symbol.O);
         }
-        players.add(player);
+        return player;
     }
 
     private Player getPlayerById(List<Player> players, int id) {

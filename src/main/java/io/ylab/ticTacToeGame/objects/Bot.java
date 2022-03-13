@@ -16,13 +16,13 @@ public class Bot extends Player {
     }
 
     public Bot() {
-
+        super();
     }
 
     @Override
     public Step move(Scanner scanner, char[][] matrix) {
         int bestVal = -1000;
-        Step step = new Step(-1, -1, this.symbol);
+        Step step = new Step(-1, -1, this);
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
                 if (matrix[row][col] == 0) {

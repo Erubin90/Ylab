@@ -75,21 +75,6 @@ public class GameBuilder {
         File file = null;
         boolean flag = true;
 
-        //Проверка стандартной директории на файлы
-
-//        if (files != null) {
-//            XMLFiles = new ArrayList<>();
-//            for (File f : files) {
-//                if (f.isFile()) {
-//                    if (f.getName().matches(".+\\.xml")) {
-//                        XMLFiles.add(f);
-//                    }
-//                }
-//            }
-//            Message.printFileList(XMLFiles);
-//        }
-//        Message.printDash();
-
         //Выбор пользователем файла для симуляции
         while (flag) {
             String name = scan.nextLine();
