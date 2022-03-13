@@ -1,6 +1,6 @@
 package io.ylab.ticTacToeGame.repositories;
 
-import io.ylab.ticTacToeGame.Convert;
+import io.ylab.ticTacToeGame.tools.Convert;
 import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.Person;
 
@@ -15,7 +15,7 @@ public class PlayerLocalStorageRepository extends LocalStorage implements Reposi
     private final Convert convert;
 
     public PlayerLocalStorageRepository() {
-        this.file = new File("src/main/java/io/ylab/lesson2/ticTacToeGame/Players.txt");
+        this.file = new File("src/main/java/io/ylab/ticTacToeGame/Players.txt");
         this.convert = new Convert(" : ", "\n");
     }
 
