@@ -5,24 +5,31 @@ import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.Simulation;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
+import io.ylab.ticTacToeGame.parser.adapters.NumberStepAdapter;
+import io.ylab.ticTacToeGame.parser.adapters.StepAdapter;
 import io.ylab.ticTacToeGame.tools.Checker;
 
 import javax.xml.namespace.QName;
-import javax.xml.stream.*;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XMLToSimulationGameParser {
+public class XMLToSimulationGameParser{
 
-    protected static final XMLInputFactory INPUT_FACTORY = XMLInputFactory.newInstance();
+    private static final XMLInputFactory INPUT_FACTORY = XMLInputFactory.newInstance();
 
-    protected File file;
+    private File file;
+
+    private StepAdapter stepAdapter;
 
     public XMLToSimulationGameParser() {
     }
@@ -35,11 +42,11 @@ public class XMLToSimulationGameParser {
     public void setFile(File file) {
         Checker.checkFile(file);
         this.file = file;
+        this.stepAdapter = null;
     }
 
-    public SimulationGame read() throws FileNotFoundException{
+    public SimulationGame read() throws IOException {
         Player player;
-        Step step;
         List<Player> players = new ArrayList<>();
         List<Step> steps = new ArrayList<>();
         try {
@@ -61,7 +68,6 @@ public class XMLToSimulationGameParser {
                             break;
                         // получаем Step
                         case "Step":
-                            step = new Step();
                             String numAtt = startElement
                                     .getAttributeByName(new QName("num"))
                                     .getValue();
@@ -69,37 +75,14 @@ public class XMLToSimulationGameParser {
                                     .getAttributeByName(new QName("playerId"))
                                     .getValue();
                             xmlEvent = reader.nextEvent();
-                            var move = xmlEvent.asCharacters().toString();
-                            if (numAtt != null)
-                                step.setNum(Integer.parseInt(numAtt));
-                            if (playerIdAtt != null) {
-                                int playerId = Integer.parseInt(playerIdAtt);
-                                player = getPlayerById(players, playerId);
-                                step.setPlayer(player);
+                            String move = xmlEvent.asCharacters().toString();
+
+                            if (stepAdapter == null) {
+                                if (move.matches("\\d+") || move.matches("\\d\\D+\\d"))
+                                    stepAdapter = new NumberStepAdapter(players);
                             }
-                            if (move != null) {
-                                if (move.matches("\\d")) {
-                                    int intMove = Integer.parseInt(move);
-                                    intMove--;
-                                    int row = intMove / 3;
-                                    int col = intMove - row * 3;
-                                    step.setRow(row);
-                                    step.setCol(col);
-                                } else if (move.matches("\\d{2}")) {
-                                    String[] rowCol = move.split("");
-                                    int row = Integer.parseInt(rowCol[0]);
-                                    int col = Integer.parseInt(rowCol[1]);
-                                    step.setRow(row);
-                                    step.setCol(col);
-                                } else if (move.matches("\\d[|\\\\/;:,.\t ]+\\d")) {
-                                    String[] rowCol = move.split("[|\\\\/;:,.\t ]");
-                                    int row = Integer.parseInt(rowCol[0]);
-                                    int col = Integer.parseInt(rowCol[1]);
-                                    step.setRow(row);
-                                    step.setCol(col);
-                                }
-                            }
-                            steps.add(step);
+                            stepAdapter.addStep(numAtt, playerIdAtt, move);
+
                             break;
                         //Добавляем игрока победителя в конец списка игроков
                         case "GameResult":
@@ -113,6 +96,14 @@ public class XMLToSimulationGameParser {
                             break;
                     }
                 }
+                else if (xmlEvent.isEndElement()) {
+                    EndElement endElement = xmlEvent.asEndElement();
+                    switch (endElement.getName().getLocalPart()) {
+                        case "Game":
+                            steps = stepAdapter.getStepList();
+                            break;
+                    }
+                }
             }
             reader.close();
         }
@@ -120,7 +111,7 @@ public class XMLToSimulationGameParser {
             exc.printStackTrace();
         }
 
-        return new SimulationGame(players, steps);
+        return new SimulationGame(players, steps, stepAdapter.getSizeMatrix());
     }
 
     private Player getPlayer(StartElement startElement) {
@@ -140,11 +131,5 @@ public class XMLToSimulationGameParser {
                 player.setSymbol(Symbol.O);
         }
         return player;
-    }
-
-    private Player getPlayerById(List<Player> players, int id) {
-        Player p1 = players.get(0);
-        Player p2 = players.get(1);
-        return p1.getId() == id ? p1 : p2;
     }
 }

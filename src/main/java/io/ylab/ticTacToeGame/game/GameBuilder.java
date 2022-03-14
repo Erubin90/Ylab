@@ -5,8 +5,10 @@ import io.ylab.ticTacToeGame.parser.XMLToSimulationGameParser;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.util.*;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 public class GameBuilder {
 
@@ -14,7 +16,7 @@ public class GameBuilder {
 
     private static XMLToSimulationGameParser parser;
 
-    public static Game createGame(Scanner scan){
+    public static Game createGame(Scanner scan) {
         TypeGame typeGame = null;
         boolean flag = true;
         Message.printPlayWithBot();
@@ -49,13 +51,15 @@ public class GameBuilder {
             case BOT_PLAYER:
                 return new PersonGame(scan, typeGame);
             case SIMULATION:
-                try {
-                    File file = selectFileForSimulation(scan);
-                    parser = new XMLToSimulationGameParser(file);
-                    return parser.read();
-                }
-                catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                while (true) {
+                    try {
+                        File file = selectFileForSimulation(scan);
+                        parser = new XMLToSimulationGameParser(file);
+                        return parser.read();
+                    }
+                    catch (IOException e) {
+                        Message.printErrorFile();
+                    }
                 }
             default:
                 throw new IllegalArgumentException("Не правильный тип игры:" + typeGame);

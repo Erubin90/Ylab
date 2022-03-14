@@ -9,6 +9,13 @@ import java.util.Scanner;
 
 public class SimulationGame extends Game {
 
+    public SimulationGame(List<Player> players, List<Step> steps, int sizeMatrix) {
+        this.players = players;
+        this.steps = steps;
+        this.scan = new Scanner(System.in);
+        this.matrix = new char[sizeMatrix][sizeMatrix];
+    }
+
     public SimulationGame(List<Player> players, List<Step> steps) {
         super();
         this.players = players;
@@ -39,6 +46,14 @@ public class SimulationGame extends Game {
         else
             Message.printDrawPlayers();
         Message.printContinueSimulationGame();
-        return this.isContinueGame(scan);
+        return isContinueGame(scan);
+    }
+
+    //Для теста
+    public String getInfoForTest() {
+        return "SimulationGame{" +
+                "players=" + players +
+                ", steps=" + steps +
+                '}';
     }
 }
