@@ -57,11 +57,11 @@ public class Step {
         this.num = num;
     }
 
+    //Для теста
     @Override
     public String toString() {
         return "Step{" +
-                "playerId=" + player +
-                ", num=" + num +
+                "num=" + num +
                 ", row=" + row +
                 ", col=" + col +
                 '}';
