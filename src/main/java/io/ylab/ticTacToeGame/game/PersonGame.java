@@ -1,22 +1,19 @@
 package io.ylab.ticTacToeGame.game;
 
+import io.ylab.ticTacToeGame.objects.Bot;
 import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.Step;
-import io.ylab.ticTacToeGame.objects.Bot;
-import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
-import io.ylab.ticTacToeGame.objects.enums.ResultGame;
-import io.ylab.ticTacToeGame.objects.enums.Symbol;
-import io.ylab.ticTacToeGame.objects.enums.TypeGame;
-import io.ylab.ticTacToeGame.parser.GameToXMLParser;
+import io.ylab.ticTacToeGame.objects.enums.*;
 import io.ylab.ticTacToeGame.repositories.PlayerLocalStorageRepository;
 
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class PersonGame extends Game {
 
     private final PlayerLocalStorageRepository storage;
-
-    private final GameToXMLParser parser;
 
     public PersonGame(Scanner scan, TypeGame typeGame) {
         super();
@@ -26,7 +23,7 @@ public class PersonGame extends Game {
         this.players = new ArrayList<>();
         this.steps = new ArrayList<>();
         this.storage = new PlayerLocalStorageRepository();
-        this.parser = new GameToXMLParser();
+
     }
 
     //Метод в котором прописана логика игры
@@ -37,8 +34,8 @@ public class PersonGame extends Game {
         configuration();
         Message.printGameRules(countPattern);
         while (playGame == ContinueGame.CONTINUE) {
-            Player winPlayer = game();
-            playGame = end(winPlayer);
+            game();
+            playGame = end();
         }
         return playGame;
     }
@@ -129,12 +126,10 @@ public class PersonGame extends Game {
     }
     
     /*
-    Возвращает победителя.
-    Если ничья возвращает null
+    Присваивает победителя полю winPlayer.
      */
-    private Player game() {
+    private void game() {
         ResultGame resultGame = ResultGame.NEXT_MOVE;
-        Player winPlayer = null;
 
         Message.printStartGame(players);
         Message.printSeparator("-", countPattern);
@@ -154,20 +149,19 @@ public class PersonGame extends Game {
                     resultGame = checkWin(matrix);
                     num++;
                     if (resultGame == ResultGame.WIN) {
-                        winPlayer = player;
+                        this.winPlayer = player;
                         break;
                     }
                 } else
                     break;
             }
         }
-        return winPlayer;
     }
 
-    private ContinueGame end(Player winPlayer) {
-        if (winPlayer != null) {
-            winPlayer.addPoint();
-            String winName = winPlayer.getName();
+    private ContinueGame end() {
+        if (this.winPlayer != null) {
+            this.winPlayer.addPoint();
+            String winName = this.winPlayer.getName();
             int point = scope.get(winName);
             scope.put(winName, ++point);
             Message.printWinPlayer(winName);
@@ -175,10 +169,14 @@ public class PersonGame extends Game {
         else
             Message.printDrawPlayers();
         storage.saveAll(players);
-        parser.write(players, winPlayer, steps);
+        try {
+            saveGame(Directory.HISTORY_GAME, FileFormat.JSON, FileFormat.XML);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         Message.printGameScope(scope);
         Message.printSeparator("-", countPattern);
-
         Message.printContinuePersonGame();
         return this.isContinueGame(scan);
     }

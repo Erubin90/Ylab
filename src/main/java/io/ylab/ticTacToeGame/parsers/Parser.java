@@ -1,0 +1,11 @@
+package io.ylab.ticTacToeGame.parsers;
+
+import java.io.File;
+import java.io.IOException;
+
+public interface Parser<T> {
+
+    T read(File file) throws IOException;
+
+    void write(T t, File file) throws IOException;
+}

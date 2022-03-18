@@ -1,4 +1,4 @@
-package io.ylab.ticTacToeGame.parser.adapters;
+package io.ylab.ticTacToeGame.parsers.gameParsers.adapters;
 
 import io.ylab.ticTacToeGame.exceptions.StepNoCorrectValueException;
 import io.ylab.ticTacToeGame.objects.Player;
@@ -106,7 +106,6 @@ public class NumberStepAdapter implements StepAdapter {
     public int getSizeMatrix() {
         return  this.sizeMatrix;
     }
-
 
     private Player getPlayerById(String playerId) {
         int id = Integer.parseInt(playerId);

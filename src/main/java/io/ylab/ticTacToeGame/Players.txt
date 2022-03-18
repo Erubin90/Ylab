@@ -1,4 +1,6 @@
+Magomedamin : 5
 Bot : 2
-Magomedamin : 2
+Kate : 1
 Halper : 0
 Healper : 0
+апапа : 0

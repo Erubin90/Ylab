@@ -2,6 +2,7 @@ package io.ylab.ticTacToeGame.game;
 
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.Player;
+import io.ylab.ticTacToeGame.objects.enums.FileFormat;
 
 import java.io.File;
 import java.util.List;
@@ -139,6 +140,14 @@ public class Message {
     }
 
     public static void printDash() {
+        System.out.print(dash);
+    }
+
+    public static void printChooseFormatFile() {
+        var formats = FileFormat.values();
+        System.out.println("Выберете формат файла симуляции");
+        for (int num = 1; num <= formats.length; num++)
+            System.out.println(num + ". " + formats[num - 1].getFormat());
         System.out.print(dash);
     }
 }

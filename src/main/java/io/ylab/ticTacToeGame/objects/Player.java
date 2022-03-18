@@ -1,16 +1,26 @@
 package io.ylab.ticTacToeGame.objects;
 
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Scanner;
 
 public abstract class Player {
+
+    @Getter
+    @Setter
     protected int id;
 
+    @Getter
+    @Setter
     protected String name;
 
+    @Getter
+    @Setter
     protected Symbol symbol;
 
+    @Getter
     protected int point;
 
     private static int count = 0;
@@ -40,31 +50,12 @@ public abstract class Player {
         point++;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Symbol getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(Symbol symbol) {
-        this.symbol = symbol;
-    }
-
-    public int getPoint() {
-        return point;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", symbol=" + symbol +
+                '}';
     }
 }

@@ -32,12 +32,11 @@ public class SimulationGame extends Game {
             Message.printBotMove(player.getName(), step);
             int row = step.getRow();
             int col = step.getCol();
-            char sing = step.getSymbol().getSing();
+            char sing = player.getSymbol().getSing();
             matrix[row][col] = sing;
             Message.printMatrix(matrix);
             Message.printSeparator("-", countPattern);
         }
-        Player winPlayer = players.size() == 3 ? players.get(2) : null;
 
         if (winPlayer != null) {
             String winName = winPlayer.getName();
@@ -47,13 +46,5 @@ public class SimulationGame extends Game {
             Message.printDrawPlayers();
         Message.printContinueSimulationGame();
         return isContinueGame(scan);
-    }
-
-    //Для теста
-    public String getInfoForTest() {
-        return "SimulationGame{" +
-                "players=" + players +
-                ", steps=" + steps +
-                '}';
     }
 }

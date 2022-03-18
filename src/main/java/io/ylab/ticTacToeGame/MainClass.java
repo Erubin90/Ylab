@@ -1,6 +1,7 @@
 package io.ylab.ticTacToeGame;
 
-import io.ylab.ticTacToeGame.game.*;
+import io.ylab.ticTacToeGame.game.Game;
+import io.ylab.ticTacToeGame.game.GameBuilder;
 import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
 
 import java.util.Scanner;
@@ -20,6 +21,5 @@ public class MainClass {
         }
         while (continueGame != ContinueGame.EXIT);
         scanner.close();
-
     }
 }

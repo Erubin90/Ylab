@@ -14,5 +14,6 @@
         <Step num="9" playerId="1">7</Step>
     </Game>
     <GameResult>
-        <Player id="1" name="Igor" symbol="X"/></GameResult>
+        <Player id="1" name="Igor" symbol="X"/>
+    </GameResult>
 </Gameplay>

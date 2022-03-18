@@ -2,22 +2,35 @@ package io.ylab.ticTacToeGame.game;
 
 import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.Step;
-import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
-import io.ylab.ticTacToeGame.objects.enums.ResultGame;
-import io.ylab.ticTacToeGame.objects.enums.Symbol;
-import io.ylab.ticTacToeGame.objects.enums.TypeGame;
+import io.ylab.ticTacToeGame.objects.enums.*;
+import io.ylab.ticTacToeGame.parsers.gameParsers.GameParser;
+import io.ylab.ticTacToeGame.tools.Creator;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public abstract class Game {
 
+    @Getter
     protected Map<String, Integer> scope;
 
     protected char[][] matrix;
 
     protected TypeGame typeGame;
 
+    @Getter
+    @Setter
     protected List<Player> players;
 
+    @Getter
+    @Setter
+    protected Player winPlayer;
+
+    @Getter
+    @Setter
     protected List<Step> steps;
 
     protected Scanner scan;
@@ -95,6 +108,7 @@ public abstract class Game {
                 //Сыграть еще один раунд
                 case "1":
                     matrix = new char[3][3];
+                    steps = new ArrayList<>();
                     return ContinueGame.CONTINUE;
                 //Создать новую игру
                 case "2":
@@ -106,5 +120,22 @@ public abstract class Game {
                     Message.printErrorAnswer();
             }
         }
+    }
+
+    protected void saveGame(Directory directory, FileFormat... fileFormats) throws IOException {
+        for (var formatFile : fileFormats) {
+            File file = Creator.createFile(players, formatFile, directory);
+            GameParser parser = new GameParser(formatFile);
+            parser.write(this, file);
+        }
+    }
+
+    //Для теста
+    public String getInfoForTest() {
+        return "Game{" +
+                "players=" + players +
+                ", steps=" + steps +
+                ", winPlayer=" + winPlayer +
+                '}';
     }
 }

@@ -1,15 +1,18 @@
 package io.ylab.ticTacToeGame.parser;
 
+import io.ylab.ticTacToeGame.game.Game;
+import io.ylab.ticTacToeGame.game.SimulationGame;
 import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.Simulation;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
+import io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser.GameToXMLParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class GameToXMLParserTest {
+class GameToXmlParserTest {
 
     GameToXMLParser parser = new GameToXMLParser();
 
@@ -33,6 +36,8 @@ class GameToXMLParserTest {
                 steps.add(step);
             }
         }
-        parser.write(players, ruslan, steps);
+        Game game = new SimulationGame(players, steps);
+        game.setWinPlayer(ruslan);
+        parser.write(game);
     }
 }

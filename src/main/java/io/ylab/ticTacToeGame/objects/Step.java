@@ -1,7 +1,11 @@
 package io.ylab.ticTacToeGame.objects;
 
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Step {
 
     private Player player;
@@ -12,6 +16,8 @@ public class Step {
 
     private int col;
 
+    private Symbol symbol;
+
     public Step() {
     }
 
@@ -19,51 +25,26 @@ public class Step {
         this.row = row;
         this.col = col;
         this.player = player;
+        this.symbol = player.getSymbol();
     }
 
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
-    }
-
-    public Symbol getSymbol() {
-        return player.getSymbol();
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
+    public Step(int num, int row, int col, Player player) {
         this.num = num;
+        this.row = row;
+        this.col = col;
+        this.player = player;
+        this.symbol = player.getSymbol();
     }
 
     //Для теста
     @Override
     public String toString() {
         return "Step{" +
-                "num=" + num +
+                "playerId=" + player.getId() +
+                ", num=" + num +
                 ", row=" + row +
                 ", col=" + col +
+                ", symbol=" + symbol +
                 '}';
     }
 }

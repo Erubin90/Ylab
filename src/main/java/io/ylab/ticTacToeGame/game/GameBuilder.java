@@ -1,7 +1,10 @@
 package io.ylab.ticTacToeGame.game;
 
+import io.ylab.ticTacToeGame.objects.enums.Directory;
+import io.ylab.ticTacToeGame.objects.enums.FileFormat;
 import io.ylab.ticTacToeGame.objects.enums.TypeGame;
-import io.ylab.ticTacToeGame.parser.XMLToSimulationGameParser;
+import io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser.XMLToGameParser;
+import lombok.NoArgsConstructor;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -10,11 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+@NoArgsConstructor
 public class GameBuilder {
-
-    private static final File DIRECTORY = new File("src/main/java/io/ylab/ticTacToeGame/simulationGame/");
-
-    private static XMLToSimulationGameParser parser;
+    private static final XMLToGameParser parserReader = new XMLToGameParser();
 
     public static Game createGame(Scanner scan) {
         TypeGame typeGame = null;
@@ -54,8 +55,7 @@ public class GameBuilder {
                 while (true) {
                     try {
                         File file = selectFileForSimulation(scan);
-                        parser = new XMLToSimulationGameParser(file);
-                        return parser.read();
+                        return parserReader.read(file);
                     }
                     catch (IOException e) {
                         Message.printErrorFile();
@@ -67,9 +67,30 @@ public class GameBuilder {
     }
 
     private static File selectFileForSimulation(Scanner scan) {
+        boolean flag = true;
+        FileFormat format = null;
+        Message.printChooseFormatFile();
+        while (flag) {
+            String num = scan.nextLine();
+            switch (num) {
+                case "1":
+                    format = FileFormat.XML;
+                    flag = false;
+                    break;
+                case "2":
+                    format = FileFormat.JSON;
+                    flag = false;
+                    break;
+                default:
+                    Message.printErrorAnswer();
+            }
+        }
+
+        String reg = ".+\\." + format;
         Message.printSelectFileForSimulation();
-        FileFilter filter = (pathname) -> pathname.getName().matches(".*\\.xml");
-        File[] files = DIRECTORY.listFiles(filter);
+        FileFilter filter = (pathname) -> pathname.getName().matches(reg);
+        File directory = new File(Directory.HISTORY_GAME.getPath());
+        File[] files = directory.listFiles(filter);
         List<File> XMLFiles = null;
         if (files != null && files.length > 0) {
             XMLFiles = Arrays.asList(files);
@@ -77,7 +98,7 @@ public class GameBuilder {
         }
         Message.printDash();
         File file = null;
-        boolean flag = true;
+        flag = true;
 
         //Выбор пользователем файла для симуляции
         while (flag) {
@@ -91,13 +112,12 @@ public class GameBuilder {
                 else
                     Message.printErrorAnswer();
             }
-            else if (name.matches(".+/.+\\.xml")) {
+            else if (name.matches(".+/.+\\." + format)) {
                 file = new File(name);
                 flag = false;
             }
-            else {
+            else
                 Message.printErrorAnswer();
-            }
         }
         return file;
     }

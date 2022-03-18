@@ -1,5 +1,7 @@
 package io.ylab.ticTacToeGame.objects;
 
+import io.ylab.ticTacToeGame.objects.enums.Symbol;
+
 import java.util.Scanner;
 
 public class Simulation extends Player {
@@ -10,6 +12,12 @@ public class Simulation extends Player {
 
     public Simulation(String name) {
         super(name);
+    }
+
+    public Simulation(int  id, String name, Symbol symbol) {
+        super(name);
+        this.id = id;
+        this.symbol = symbol;
     }
 
     @Override
