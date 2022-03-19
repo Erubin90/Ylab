@@ -1,5 +1,10 @@
 package io.ylab.ticTacToeGame.objects.enums;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
 public enum ResultGame {
     WIN,
     DRAW,
@@ -7,14 +12,7 @@ public enum ResultGame {
 
     private Symbol symbol;
 
-    ResultGame() {
-    }
-
     public void setSymbol(Symbol symbol) {
         this.symbol = symbol;
-    }
-
-    public Symbol getSymbol() {
-        return symbol;
     }
 }

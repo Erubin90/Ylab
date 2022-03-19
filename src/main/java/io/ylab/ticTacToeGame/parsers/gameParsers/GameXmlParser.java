@@ -1,26 +1,36 @@
 package io.ylab.ticTacToeGame.parsers.gameParsers;
 
-import io.ylab.ticTacToeGame.game.Game;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import io.ylab.ticTacToeGame.model.GameAnswer;
+import io.ylab.ticTacToeGame.model.GamePlayModel;
+import io.ylab.ticTacToeGame.objects.game.Game;
 import io.ylab.ticTacToeGame.parsers.Parser;
-import io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser.GameToXMLParser;
-import io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser.XMLToGameParser;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class GameXmlParser implements Parser<Game> {
 
-    private static final XMLToGameParser reader = new XMLToGameParser();
-
-    private static final GameToXMLParser writer = new GameToXMLParser();
+    private static final XmlMapper XML_MAPPER = new XmlMapper();
 
     @Override
     public Game read(File file) throws IOException {
-        return reader.read(file);
+        var gameAnswer = XML_MAPPER.readValue(file, GameAnswer.class);
+        return gameAnswer.getGame();
     }
 
     @Override
     public void write(Game game, File file) throws IOException {
-        writer.write(game, file);
+        var gameplay = new GamePlayModel(game);
+        try (var outputStream = new FileOutputStream(file)) {
+            String heading = "<?xml version='1.0' encoding='windows-1251'?>\n";
+            String content = XML_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(gameplay);
+            outputStream.write(heading.getBytes());
+            outputStream.write(content.getBytes());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

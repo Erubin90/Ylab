@@ -1,4 +1,4 @@
-package io.ylab.ticTacToeGame.parsers.gameParsers.adapters;
+package io.ylab.ticTacToeGame.parsers.adapters;
 
 import io.ylab.ticTacToeGame.objects.Step;
 

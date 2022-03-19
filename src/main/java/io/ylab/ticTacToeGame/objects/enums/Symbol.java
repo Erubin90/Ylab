@@ -1,18 +1,15 @@
 package io.ylab.ticTacToeGame.objects.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum Symbol {
     X('X'),
     O('O');
 
     private final char sing;
-
-    Symbol(char sing) {
-        this.sing = sing;
-    }
-
-    public char getSing() {
-        return sing;
-    }
 
     public static Symbol getOpponentSymbol(Symbol mySymbol) {
         return mySymbol == Symbol.X ? Symbol.O : Symbol.X;

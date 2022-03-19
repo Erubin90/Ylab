@@ -1,12 +1,10 @@
-package io.ylab.ticTacToeGame.objects;
+package io.ylab.ticTacToeGame.objects.players;
 
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Scanner;
-
-public abstract class Player {
+public abstract class AbstractPlayer implements Player {
 
     @Getter
     @Setter
@@ -25,26 +23,24 @@ public abstract class Player {
 
     private static int count = 0;
 
-    public Player() {
+    public AbstractPlayer() {
         count++;
         this.id = count;
     }
 
-    public Player(String name) {
+    public AbstractPlayer(String name) {
         this.name = name;
         this.point = 0;
         count++;
         this.id = count;
     }
 
-    public Player(String name, int point) {
+    public AbstractPlayer(String name, int point) {
         this.name = name;
         this.point = point;
         count++;
         this.id = count;
     }
-
-    public abstract Step move(Scanner scan, char[][] matrix);
 
     public void addPoint() {
         point++;

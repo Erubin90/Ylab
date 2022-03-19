@@ -1,10 +1,11 @@
-package io.ylab.ticTacToeGame.objects;
+package io.ylab.ticTacToeGame.objects.players;
 
-import io.ylab.ticTacToeGame.game.Message;
+import io.ylab.ticTacToeGame.objects.Message;
+import io.ylab.ticTacToeGame.objects.Step;
 
 import java.util.Scanner;
 
-public class Person extends Player {
+public class Person extends AbstractPlayer {
 
     public Person() {
         super();

@@ -1,6 +1,7 @@
 package io.ylab.ticTacToeGame.objects;
 
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
+import io.ylab.ticTacToeGame.objects.players.Player;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,6 +33,11 @@ public class Step {
         this.num = num;
         this.row = row;
         this.col = col;
+        this.player = player;
+        this.symbol = player.getSymbol();
+    }
+
+    public void setPlayer(Player player) {
         this.player = player;
         this.symbol = player.getSymbol();
     }

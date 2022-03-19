@@ -1,8 +1,8 @@
 package io.ylab.ticTacToeGame.tools;
 
-import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.enums.Directory;
 import io.ylab.ticTacToeGame.objects.enums.FileFormat;
+import io.ylab.ticTacToeGame.objects.players.Player;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -12,8 +12,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Creator {
-
-
 
     public static File createFile(List<Player> players, FileFormat fileFormat, Directory directory) throws IOException {
         String fullName = players.get(0).getName() + "vs" + players.get(1).getName() + "_";

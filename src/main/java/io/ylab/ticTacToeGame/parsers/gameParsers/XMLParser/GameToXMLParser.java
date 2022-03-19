@@ -1,11 +1,11 @@
 package io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser;
 
-import io.ylab.ticTacToeGame.game.Game;
 import io.ylab.ticTacToeGame.objects.enums.Directory;
 import io.ylab.ticTacToeGame.objects.enums.FileFormat;
-import io.ylab.ticTacToeGame.parsers.gameParsers.object.GamePlay;
-import io.ylab.ticTacToeGame.parsers.gameParsers.object.PlayerPojo;
-import io.ylab.ticTacToeGame.parsers.gameParsers.object.StepPojo;
+import io.ylab.ticTacToeGame.model.GamePlayModel;
+import io.ylab.ticTacToeGame.model.PlayerModel;
+import io.ylab.ticTacToeGame.model.StepModel;
+import io.ylab.ticTacToeGame.objects.game.Game;
 import io.ylab.ticTacToeGame.tools.Creator;
 
 import javax.xml.stream.XMLOutputFactory;
@@ -35,10 +35,10 @@ public class GameToXMLParser {
     }
 
     public void write(Game game, File file) throws IOException {
-        var gamePlay = new GamePlay(game);
-        var players = gamePlay.getPlayerPojoList();
-        var steps = gamePlay.getGamePOJO().getSteps();
-        var winPlayer = gamePlay.getGameResult().getPlayerPojo();
+        var gamePlay = new GamePlayModel(game);
+        var players = gamePlay.getPlayerList();
+        var steps = gamePlay.getGameModel().getSteps();
+        var winPlayer = gamePlay.getGameResult().getPlayer();
         XMLStreamWriter writer;
         try {
             writer = OUTPUT_FACTORY.createXMLStreamWriter(new FileOutputStream(file), "windows-1251");
@@ -98,7 +98,7 @@ public class GameToXMLParser {
         }
     }
 
-    private void addPlayer(XMLStreamWriter writer, PlayerPojo player) throws XMLStreamException {
+    private void addPlayer(XMLStreamWriter writer, PlayerModel player) throws XMLStreamException {
         if (player != null) {
             String id = player.getId();
             String name = player.getName();
@@ -112,7 +112,7 @@ public class GameToXMLParser {
         }
     }
 
-    private void addStep(XMLStreamWriter writer, StepPojo step) throws XMLStreamException {
+    private void addStep(XMLStreamWriter writer, StepModel step) throws XMLStreamException {
         writer.writeCharacters(TAB);
         writer.writeStartElement("Step");
         String num = step.getNum();

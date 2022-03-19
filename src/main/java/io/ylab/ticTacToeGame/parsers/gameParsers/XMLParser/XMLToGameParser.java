@@ -1,7 +1,7 @@
 package io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser;
 
-import io.ylab.ticTacToeGame.game.Game;
-import io.ylab.ticTacToeGame.parsers.gameParsers.object.*;
+import io.ylab.ticTacToeGame.model.*;
+import io.ylab.ticTacToeGame.objects.game.Game;
 import io.ylab.ticTacToeGame.tools.Checker;
 
 import javax.xml.namespace.QName;
@@ -24,12 +24,12 @@ public class XMLToGameParser {
 
     public Game read(File file) throws IOException {
         Checker.checkFile(file);
-        GamePlay gamePlay = new GamePlay();
-        var players = new ArrayList<PlayerPojo>();
-        var steps = new ArrayList<StepPojo>();
-        PlayerPojo winPlayer = null;
-        PlayerPojo player;
-        StepPojo step;
+        GamePlayModel gamePlay = new GamePlayModel();
+        var players = new ArrayList<PlayerModel>();
+        var steps = new ArrayList<StepModel>();
+        PlayerModel winPlayer = null;
+        PlayerModel player;
+        StepModel step;
         try {
             /*
             инициализируем reader и скармливаем ему xml файл
@@ -57,7 +57,7 @@ public class XMLToGameParser {
                                 .getValue();
                         xmlEvent = reader.nextEvent();
                         String move = xmlEvent.asCharacters().getData();
-                        step = new StepPojo(playerId, num, move);
+                        step = new StepModel(playerId, num, move);
                         steps.add(step);
                     }
                     //Добавляем игрока победителя в конец списка игроков
@@ -77,13 +77,13 @@ public class XMLToGameParser {
         catch (XMLStreamException exc) {
             exc.printStackTrace();
         }
-        gamePlay.setPlayerPojoList(players);
-        gamePlay.setGamePOJO(new GamePojo(steps));
-        gamePlay.setGameResult(new GameResult(winPlayer));
+        gamePlay.setPlayerList(players);
+        gamePlay.setGameModel(new GameModel(steps));
+        gamePlay.setGameResult(new GameResultModel(winPlayer));
         return gamePlay.getGame();
     }
 
-    private PlayerPojo getPlayer(StartElement startElement) {
+    private PlayerModel getPlayer(StartElement startElement) {
         String id = startElement
                 .getAttributeByName(new QName("id"))
                 .getValue();
@@ -93,6 +93,6 @@ public class XMLToGameParser {
         String symbol = startElement
                 .getAttributeByName(new QName("symbol"))
                 .getValue();
-        return new PlayerPojo(id, name, symbol);
+        return new PlayerModel(id, name, symbol);
     }
 }

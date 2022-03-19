@@ -1,8 +1,10 @@
-package io.ylab.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.objects.game;
 
-import io.ylab.ticTacToeGame.objects.Player;
+import io.ylab.ticTacToeGame.objects.players.AbstractPlayer;
+import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.*;
+import io.ylab.ticTacToeGame.objects.players.Player;
 import io.ylab.ticTacToeGame.parsers.gameParsers.GameParser;
 import io.ylab.ticTacToeGame.tools.Creator;
 import lombok.Getter;
@@ -12,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public abstract class Game {
+public abstract class AbstractGame implements Game {
 
     @Getter
     protected Map<String, Integer> scope;
@@ -37,11 +39,9 @@ public abstract class Game {
 
     protected final int countPattern = 30;
 
-    public Game() {
+    public AbstractGame() {
         this.matrix = new char[3][3];
     }
-
-    public abstract ContinueGame play();
 
     /*
     Проверяет результат игры.

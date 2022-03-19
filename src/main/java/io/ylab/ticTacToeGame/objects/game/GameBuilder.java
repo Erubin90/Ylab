@@ -1,5 +1,6 @@
-package io.ylab.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.objects.game;
 
+import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.enums.Directory;
 import io.ylab.ticTacToeGame.objects.enums.FileFormat;
 import io.ylab.ticTacToeGame.objects.enums.TypeGame;

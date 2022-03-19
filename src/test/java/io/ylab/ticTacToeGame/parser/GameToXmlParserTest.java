@@ -1,9 +1,9 @@
 package io.ylab.ticTacToeGame.parser;
 
-import io.ylab.ticTacToeGame.game.Game;
-import io.ylab.ticTacToeGame.game.SimulationGame;
-import io.ylab.ticTacToeGame.objects.Player;
-import io.ylab.ticTacToeGame.objects.Simulation;
+import io.ylab.ticTacToeGame.objects.game.Game;
+import io.ylab.ticTacToeGame.objects.game.SimulationGame;
+import io.ylab.ticTacToeGame.objects.players.Player;
+import io.ylab.ticTacToeGame.objects.players.Simulation;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
 import io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser.GameToXMLParser;

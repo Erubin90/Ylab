@@ -1,13 +1,14 @@
-package io.ylab.ticTacToeGame.objects;
+package io.ylab.ticTacToeGame.objects.players;
 
+import io.ylab.ticTacToeGame.objects.Message;
+import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
-import io.ylab.ticTacToeGame.game.PersonGame;
-import io.ylab.ticTacToeGame.game.Message;
+import io.ylab.ticTacToeGame.objects.game.PersonGame;
 import io.ylab.ticTacToeGame.objects.enums.ResultGame;
 
 import java.util.Scanner;
 
-public class Bot extends Player {
+public class Bot extends AbstractPlayer {
 
     private Symbol opponentSymbol;
 

@@ -1,13 +1,16 @@
 package io.ylab.ticTacToeGame.repositories;
 
+import io.ylab.ticTacToeGame.objects.players.Person;
+import io.ylab.ticTacToeGame.objects.players.Player;
 import io.ylab.ticTacToeGame.storages.LocalStorage;
 import io.ylab.ticTacToeGame.tools.Convert;
-import io.ylab.ticTacToeGame.objects.Player;
-import io.ylab.ticTacToeGame.objects.Person;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class PlayerLocalStorageRepository implements Repository<Player> {
 

@@ -1,10 +1,14 @@
-package io.ylab.ticTacToeGame.parsers.gameParsers.object;
+package io.ylab.ticTacToeGame.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.ylab.ticTacToeGame.objects.Player;
-import io.ylab.ticTacToeGame.objects.Simulation;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import io.ylab.ticTacToeGame.objects.players.AbstractPlayer;
+import io.ylab.ticTacToeGame.objects.players.Player;
+import io.ylab.ticTacToeGame.objects.players.Simulation;
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,27 +19,31 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonPropertyOrder({"_id", "_name", "_symbol"})
-public class PlayerPojo implements ParserObject {
+@JacksonXmlRootElement(localName = "Player")
+@JsonPropertyOrder({"id", "name", "symbol"})
+public class PlayerModel implements Model {
 
-    @JsonProperty("_id")
+//    @JsonProperty("id")
+    @JacksonXmlProperty(isAttribute = true, localName = "id")
     private String id;
 
-    @JsonProperty("_name")
+//    @JsonProperty("name")
+    @JacksonXmlProperty(isAttribute = true, localName = "name")
     private String name;
 
-    @JsonProperty("_symbol")
+//    @JsonProperty("symbol")
+    @JacksonXmlProperty(isAttribute = true, localName = "symbol")
     private String symbol;
 
     @JsonIgnore
-    public PlayerPojo(Player player) {
+    public PlayerModel(Player player) {
         this.id = String.valueOf(player.getId());
         this.name = player.getName();
         this.symbol = String.valueOf(player.getSymbol().getSing());
     }
 
     @JsonIgnore
-    public Player getPlayer() {
+    public AbstractPlayer getPlayer() {
         int id = Integer.parseInt(this.id);
         Symbol symbol = Symbol.getSymbol(this.symbol);
         return new Simulation(id, name, symbol);

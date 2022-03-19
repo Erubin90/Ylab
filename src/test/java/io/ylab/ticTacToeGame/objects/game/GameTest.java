@@ -1,4 +1,4 @@
-package io.ylab.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.objects.game;
 
 import io.ylab.ticTacToeGame.objects.enums.ResultGame;
 import org.junit.jupiter.api.Test;
@@ -40,11 +40,11 @@ class GameTest {
                 {'X', 'O', 0},
                 {'X', 0, 0}};
 
-        assertEquals(ResultGame.NEXT_MOVE, Game.checkWin(matrixNextMove1));
-        assertEquals(ResultGame.NEXT_MOVE, Game.checkWin(matrixNextMove2));
-        assertEquals(ResultGame.DRAW, Game.checkWin(matrixDrawMove));
-        assertEquals(ResultGame.WIN, Game.checkWin(matrixWinMove1));
-        assertEquals(ResultGame.WIN, Game.checkWin(matrixWinMove2));
-        assertEquals(ResultGame.WIN, Game.checkWin(matrixWinMove3));
+        assertEquals(ResultGame.NEXT_MOVE, AbstractGame.checkWin(matrixNextMove1));
+        assertEquals(ResultGame.NEXT_MOVE, AbstractGame.checkWin(matrixNextMove2));
+        assertEquals(ResultGame.DRAW, AbstractGame.checkWin(matrixDrawMove));
+        assertEquals(ResultGame.WIN, AbstractGame.checkWin(matrixWinMove1));
+        assertEquals(ResultGame.WIN, AbstractGame.checkWin(matrixWinMove2));
+        assertEquals(ResultGame.WIN, AbstractGame.checkWin(matrixWinMove3));
     }
 }

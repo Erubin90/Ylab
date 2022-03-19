@@ -1,8 +1,5 @@
 package io.ylab.ticTacToeGame.storages;
 
-
-import io.ylab.ticTacToeGame.storages.Storage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

@@ -1,13 +1,14 @@
-package io.ylab.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.objects.game;
 
-import io.ylab.ticTacToeGame.objects.Player;
+import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
+import io.ylab.ticTacToeGame.objects.players.Player;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class SimulationGame extends Game {
+public class SimulationGame extends AbstractGame {
 
     public SimulationGame(List<Player> players, List<Step> steps, int sizeMatrix) {
         this.players = players;

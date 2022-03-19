@@ -1,8 +1,8 @@
-package io.ylab.ticTacToeGame.parsers.gameParsers.adapters;
+package io.ylab.ticTacToeGame.parsers.adapters;
 
 import io.ylab.ticTacToeGame.exceptions.StepNoCorrectValueException;
-import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.Step;
+import io.ylab.ticTacToeGame.objects.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;

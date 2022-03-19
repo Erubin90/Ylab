@@ -1,7 +1,7 @@
 package io.ylab.ticTacToeGame.parsers.gameParsers;
 
-import io.ylab.ticTacToeGame.game.Game;
 import io.ylab.ticTacToeGame.objects.enums.FileFormat;
+import io.ylab.ticTacToeGame.objects.game.Game;
 import io.ylab.ticTacToeGame.parsers.Parser;
 
 import java.io.File;

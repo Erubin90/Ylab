@@ -1,8 +1,7 @@
-package io.ylab.ticTacToeGame.game;
+package io.ylab.ticTacToeGame.objects;
 
-import io.ylab.ticTacToeGame.objects.Step;
-import io.ylab.ticTacToeGame.objects.Player;
 import io.ylab.ticTacToeGame.objects.enums.FileFormat;
+import io.ylab.ticTacToeGame.objects.players.Player;
 
 import java.io.File;
 import java.util.List;

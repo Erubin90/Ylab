@@ -1,10 +1,11 @@
-package io.ylab.ticTacToeGame.objects;
+package io.ylab.ticTacToeGame.objects.players;
 
+import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
 
 import java.util.Scanner;
 
-public class Simulation extends Player {
+public class Simulation extends AbstractPlayer {
 
     public Simulation() {
         super();
