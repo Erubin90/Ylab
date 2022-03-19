@@ -1,5 +1,7 @@
 package io.ylab.lesson1.additionalTasks;
 
+import java.util.function.Function;
+
 public class Algorithms {
     private static final long[] CACHE = new long[91];
 
@@ -82,4 +84,3 @@ public class Algorithms {
         }
     }
 }
-
