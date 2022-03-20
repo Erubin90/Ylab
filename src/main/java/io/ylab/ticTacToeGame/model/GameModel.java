@@ -20,4 +20,11 @@ public class GameModel implements Model {
     @JacksonXmlElementWrapper(localName = "Steps")
     @JacksonXmlProperty(localName = "Step")
     private List<StepModel> steps;
+
+    @Override
+    public String toString() {
+        return "GameModel{" +
+                "steps=" + steps +
+                '}';
+    }
 }

@@ -1,6 +1,8 @@
 package io.ylab.ticTacToeGame;
 
+import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
+import io.ylab.ticTacToeGame.objects.enums.TypeGame;
 import io.ylab.ticTacToeGame.objects.game.Game;
 import io.ylab.ticTacToeGame.objects.game.GameBuilder;
 
@@ -16,8 +18,17 @@ public class MainClass {
         do {
             if (continueGame == ContinueGame.NEW_GAME)
                 game = GameBuilder.createGame(scanner);
-            //Возвращает ContinueGame.NEW_GAME или ContinueGame.EXIT
-            continueGame = game.play();
+            game.play();
+            switch (game.getTypeGame()) {
+                case SIMULATION:
+                    Message.printContinueSimulationGame();
+                    break;
+                case BOT_PLAYER:
+                case PLAYER_PLAYER:
+                    Message.printContinuePersonGame();
+                    break;
+            }
+            continueGame = game.isContinueGame(scanner);
         }
         while (continueGame != ContinueGame.EXIT);
         scanner.close();

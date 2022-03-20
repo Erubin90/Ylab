@@ -23,15 +23,15 @@ import lombok.Setter;
 @JsonPropertyOrder({"id", "name", "symbol"})
 public class PlayerModel implements Model {
 
-//    @JsonProperty("id")
+    @JsonProperty("id")
     @JacksonXmlProperty(isAttribute = true, localName = "id")
     private String id;
 
-//    @JsonProperty("name")
+    @JsonProperty("name")
     @JacksonXmlProperty(isAttribute = true, localName = "name")
     private String name;
 
-//    @JsonProperty("symbol")
+    @JsonProperty("symbol")
     @JacksonXmlProperty(isAttribute = true, localName = "symbol")
     private String symbol;
 

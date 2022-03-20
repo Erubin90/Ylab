@@ -16,7 +16,7 @@ public class GameXmlParser implements Parser<Game> {
 
     @Override
     public Game read(File file) throws IOException {
-        var gameAnswer = XML_MAPPER.readValue(file, GameAnswer.class);
+        var gameAnswer = XML_MAPPER.readValue(file, GamePlayModel.class);
         return gameAnswer.getGame();
     }
 

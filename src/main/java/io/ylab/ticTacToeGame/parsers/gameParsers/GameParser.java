@@ -3,23 +3,19 @@ package io.ylab.ticTacToeGame.parsers.gameParsers;
 import io.ylab.ticTacToeGame.objects.enums.FileFormat;
 import io.ylab.ticTacToeGame.objects.game.Game;
 import io.ylab.ticTacToeGame.parsers.Parser;
+import lombok.NoArgsConstructor;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Format;
 
+@NoArgsConstructor
 public class GameParser implements Parser<Game> {
 
     private Parser<Game> gameStorage;
 
     public GameParser(FileFormat fileFormat) {
-        switch (fileFormat) {
-            case XML:
-                this.gameStorage = new GameXmlParser();
-                break;
-            case JSON:
-                this.gameStorage = new GameJsonParser();
-                break;
-        }
+        setFileFormat(fileFormat);
     }
 
     @Override
@@ -30,5 +26,16 @@ public class GameParser implements Parser<Game> {
     @Override
     public void write(Game game, File file) throws IOException {
         gameStorage.write(game, file);
+    }
+
+    public void setFileFormat(FileFormat format) {
+        switch (format) {
+            case XML:
+                this.gameStorage = new GameXmlParser();
+                break;
+            case JSON:
+                this.gameStorage = new GameJsonParser();
+                break;
+        }
     }
 }

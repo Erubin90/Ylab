@@ -4,6 +4,10 @@ import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.enums.Directory;
 import io.ylab.ticTacToeGame.objects.enums.FileFormat;
 import io.ylab.ticTacToeGame.objects.enums.TypeGame;
+import io.ylab.ticTacToeGame.parsers.Parser;
+import io.ylab.ticTacToeGame.parsers.gameParsers.GameJsonParser;
+import io.ylab.ticTacToeGame.parsers.gameParsers.GameParser;
+import io.ylab.ticTacToeGame.parsers.gameParsers.GameXmlParser;
 import io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser.XMLToGameParser;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +20,7 @@ import java.util.Scanner;
 
 @NoArgsConstructor
 public class GameBuilder {
-    private static final XMLToGameParser parserReader = new XMLToGameParser();
+    private static Parser<Game> parser;
 
     public static Game createGame(Scanner scan) {
         TypeGame typeGame = null;
@@ -56,10 +60,11 @@ public class GameBuilder {
                 while (true) {
                     try {
                         File file = selectFileForSimulation(scan);
-                        return parserReader.read(file);
+                        return parser.read(file);
                     }
                     catch (IOException e) {
                         Message.printErrorFile();
+                        e.printStackTrace();
                     }
                 }
             default:
@@ -76,10 +81,12 @@ public class GameBuilder {
             switch (num) {
                 case "1":
                     format = FileFormat.XML;
+                    parser = new GameXmlParser();
                     flag = false;
                     break;
                 case "2":
                     format = FileFormat.JSON;
+                    parser = new GameJsonParser();
                     flag = false;
                     break;
                 default:

@@ -29,16 +29,12 @@ public class PersonGame extends AbstractGame {
 
     //Метод в котором прописана логика игры
     @Override
-    public ContinueGame play() {
-        ContinueGame playGame = ContinueGame.CONTINUE;
+    public void play() {
         Message.printScreensaver();
         configuration();
         Message.printGameRules(countPattern);
-        while (playGame == ContinueGame.CONTINUE) {
-            game();
-            playGame = end();
-        }
-        return playGame;
+        game();
+        end();
     }
 
     /*
@@ -159,7 +155,7 @@ public class PersonGame extends AbstractGame {
         }
     }
 
-    private ContinueGame end() {
+    private void end() {
         if (this.winPlayer != null) {
             this.winPlayer.addPoint();
             String winName = this.winPlayer.getName();
@@ -178,7 +174,5 @@ public class PersonGame extends AbstractGame {
         }
         Message.printGameScope(scope);
         Message.printSeparator("-", countPattern);
-        Message.printContinuePersonGame();
-        return this.isContinueGame(scan);
     }
 }

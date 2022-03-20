@@ -3,6 +3,7 @@ package io.ylab.ticTacToeGame.objects.game;
 import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
+import io.ylab.ticTacToeGame.objects.enums.TypeGame;
 import io.ylab.ticTacToeGame.objects.players.Player;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class SimulationGame extends AbstractGame {
         this.steps = steps;
         this.scan = new Scanner(System.in);
         this.matrix = new char[sizeMatrix][sizeMatrix];
+        this.typeGame = TypeGame.SIMULATION;
     }
 
     public SimulationGame(List<Player> players, List<Step> steps) {
@@ -22,10 +24,11 @@ public class SimulationGame extends AbstractGame {
         this.players = players;
         this.steps = steps;
         this.scan = new Scanner(System.in);
+        this.typeGame = TypeGame.SIMULATION;
     }
 
     @Override
-    public ContinueGame play() {
+    public void play() {
         Message.printStartGame(players);
         Message.printSeparator("-", countPattern);
         for (Step step: steps) {
@@ -45,7 +48,5 @@ public class SimulationGame extends AbstractGame {
         }
         else
             Message.printDrawPlayers();
-        Message.printContinueSimulationGame();
-        return isContinueGame(scan);
     }
 }

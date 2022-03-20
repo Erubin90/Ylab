@@ -26,4 +26,11 @@ public class GameAnswer {
     public Game getGame() throws StepNoCorrectValueException {
         return gamePlay.getGame();
     }
+
+    @Override
+    public String toString() {
+        return "GameAnswer{" +
+                "gamePlay=" + gamePlay +
+                '}';
+    }
 }

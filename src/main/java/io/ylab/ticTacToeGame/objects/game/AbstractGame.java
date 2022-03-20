@@ -21,6 +21,7 @@ public abstract class AbstractGame implements Game {
 
     protected char[][] matrix;
 
+    @Getter
     protected TypeGame typeGame;
 
     @Getter
@@ -101,7 +102,7 @@ public abstract class AbstractGame implements Game {
     /*
     Спрашивает у игрока дальнейшие действия после окончания раунда:
      */
-    protected ContinueGame isContinueGame(Scanner scan) {
+    public final ContinueGame isContinueGame(Scanner scan) {
         while (true) {
             String answer = scan.nextLine();
             switch (answer) {
