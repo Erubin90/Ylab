@@ -48,6 +48,7 @@ public class Message {
     public static void printStartGame(List<Player> playerList) {
         Player p1 = playerList.get(0);
         Player p2 = playerList.get(1);
+        System.out.println("Игра началась");
         System.out.println(p1.getName() + " - " + p1.getSymbol());
         System.out.println(p2.getName() + " - " + p2.getSymbol());
     }
@@ -145,7 +146,7 @@ public class Message {
     public static void printChooseFormatFile() {
         var formats = FileFormat.values();
         System.out.println("Выберете формат файла симуляции");
-        for (int num = 1; num <= formats.length; num++)
+        for (int num = 1; num <= formats.length - 1; num++)
             System.out.println(num + ". " + formats[num - 1].getFormat());
         System.out.print(dash);
     }
