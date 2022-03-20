@@ -7,9 +7,22 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum FileFormat {
     XML("xml"),
-    JSON("json");
+    JSON("json"),
+    NO_CORRECT("");
 
     private final String format;
+
+    public static FileFormat getFileFormat(String format) {
+        if (JSON.format.equals(format)) {
+            return JSON;
+        }
+        else if (XML.format.equals(format)) {
+            return XML;
+        }
+        else {
+            return NO_CORRECT;
+        }
+    }
 
     @Override
     public String toString() {
