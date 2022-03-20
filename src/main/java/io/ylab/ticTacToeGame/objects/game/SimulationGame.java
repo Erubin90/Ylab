@@ -29,6 +29,7 @@ public class SimulationGame extends AbstractGame {
 
     @Override
     public void play() {
+        Message.printSeparator("-", countPattern);
         Message.printStartGame(players);
         Message.printSeparator("-", countPattern);
         for (Step step: steps) {
