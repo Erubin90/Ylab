@@ -15,6 +15,12 @@ public class GameXmlParser implements Parser<Game> {
     private static final XmlMapper XML_MAPPER = new XmlMapper();
 
     @Override
+    public Game read(String string) throws IOException {
+        var gameAnswer = XML_MAPPER.readValue(string, GamePlayModel.class);
+        return gameAnswer.getGame();
+    }
+
+    @Override
     public Game read(File file) throws IOException {
         var gameAnswer = XML_MAPPER.readValue(file, GamePlayModel.class);
         return gameAnswer.getGame();

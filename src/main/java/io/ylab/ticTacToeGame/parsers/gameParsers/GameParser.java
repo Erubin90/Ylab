@@ -19,6 +19,11 @@ public class GameParser implements Parser<Game> {
     }
 
     @Override
+    public Game read(String string) throws IOException {
+        return gameStorage.read(string);
+    }
+
+    @Override
     public Game read(File file) throws IOException {
         return gameStorage.read(file);
     }
