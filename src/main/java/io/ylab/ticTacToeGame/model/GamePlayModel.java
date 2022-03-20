@@ -3,6 +3,7 @@ package io.ylab.ticTacToeGame.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.ylab.ticTacToeGame.exceptions.StepNoCorrectValueException;
@@ -24,11 +25,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JacksonXmlRootElement(localName = "GamePlay")
-@JsonPropertyOrder({"Players", "Game", "GameResult", "players", "game", "gameResult"})
+@JsonPropertyOrder({"Player", "Game", "GameResult", "player", "game", "gameResult"})
 public class GamePlayModel implements Model {
 
-    @JsonProperty("players")
-    @JacksonXmlProperty(localName = "Players")
+    @JsonProperty("player")
+    @JacksonXmlProperty(localName = "Player")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private List<PlayerModel> playerList;
 
     @JsonProperty("game")

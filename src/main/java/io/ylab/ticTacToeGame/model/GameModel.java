@@ -17,8 +17,8 @@ import java.util.List;
 public class GameModel implements Model {
 
     @JsonProperty("step")
-    @JacksonXmlElementWrapper(localName = "Steps")
     @JacksonXmlProperty(localName = "Step")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private List<StepModel> steps;
 
     @Override

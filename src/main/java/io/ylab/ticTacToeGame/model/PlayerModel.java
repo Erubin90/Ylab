@@ -19,7 +19,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JacksonXmlRootElement(localName = "Player")
 @JsonPropertyOrder({"id", "name", "symbol"})
 public class PlayerModel implements Model {
 
@@ -44,6 +43,9 @@ public class PlayerModel implements Model {
 
     @JsonIgnore
     public AbstractPlayer getPlayer() {
+        if (id == null || name == null || symbol == null) {
+            return null;
+        }
         int id = Integer.parseInt(this.id);
         Symbol symbol = Symbol.getSymbol(this.symbol);
         return new Simulation(id, name, symbol);
