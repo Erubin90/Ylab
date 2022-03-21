@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='windows-1251'?>
+<GamePlay>
+  <Player id="1" name="a" symbol="X"/>
+  <Player id="3" name="Bot" symbol="O"/>
+  <Game>
+    <Step playerId="1" num="1">0 0</Step>
+    <Step playerId="3" num="2">1 1</Step>
+    <Step playerId="1" num="3">0 2</Step>
+    <Step playerId="3" num="4">0 1</Step>
+    <Step playerId="1" num="5">2 1</Step>
+    <Step playerId="3" num="6">1 0</Step>
+    <Step playerId="1" num="7">1 2</Step>
+    <Step playerId="3" num="8">2 2</Step>
+    <Step playerId="1" num="9">2 0</Step>
+  </Game>
+  <GameResult>
+    <Player/>
+  </GameResult>
+</GamePlay>

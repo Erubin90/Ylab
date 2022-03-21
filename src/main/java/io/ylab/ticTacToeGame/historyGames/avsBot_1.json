@@ -1,0 +1,55 @@
+{
+  "gameplay" : {
+    "player" : [ {
+      "id" : "1",
+      "name" : "a",
+      "symbol" : "X"
+    }, {
+      "id" : "3",
+      "name" : "Bot",
+      "symbol" : "O"
+    } ],
+    "game" : {
+      "step" : [ {
+        "playerId" : "1",
+        "num" : "1",
+        "text" : "0 0"
+      }, {
+        "playerId" : "3",
+        "num" : "2",
+        "text" : "1 1"
+      }, {
+        "playerId" : "1",
+        "num" : "3",
+        "text" : "0 2"
+      }, {
+        "playerId" : "3",
+        "num" : "4",
+        "text" : "0 1"
+      }, {
+        "playerId" : "1",
+        "num" : "5",
+        "text" : "2 1"
+      }, {
+        "playerId" : "3",
+        "num" : "6",
+        "text" : "1 0"
+      }, {
+        "playerId" : "1",
+        "num" : "7",
+        "text" : "1 2"
+      }, {
+        "playerId" : "3",
+        "num" : "8",
+        "text" : "2 2"
+      }, {
+        "playerId" : "1",
+        "num" : "9",
+        "text" : "2 0"
+      } ]
+    },
+    "gameResult" : {
+      "player" : null
+    }
+  }
+}
