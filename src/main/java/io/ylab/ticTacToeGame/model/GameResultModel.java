@@ -1,11 +1,11 @@
 package io.ylab.ticTacToeGame.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import lombok.*;
-import net.minidev.json.annotate.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -15,7 +15,6 @@ public class GameResultModel implements Model {
 
     @JsonProperty("player")
     @JacksonXmlProperty(localName = "Player")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private PlayerModel player;
 
     @Override
