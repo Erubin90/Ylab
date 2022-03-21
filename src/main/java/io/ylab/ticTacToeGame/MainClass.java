@@ -2,7 +2,6 @@ package io.ylab.ticTacToeGame;
 
 import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
-import io.ylab.ticTacToeGame.objects.enums.TypeGame;
 import io.ylab.ticTacToeGame.objects.game.Game;
 import io.ylab.ticTacToeGame.objects.game.GameBuilder;
 

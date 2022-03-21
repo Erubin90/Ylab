@@ -6,9 +6,7 @@ import io.ylab.ticTacToeGame.objects.enums.FileFormat;
 import io.ylab.ticTacToeGame.objects.enums.TypeGame;
 import io.ylab.ticTacToeGame.parsers.Parser;
 import io.ylab.ticTacToeGame.parsers.gameParsers.GameJsonParser;
-import io.ylab.ticTacToeGame.parsers.gameParsers.GameParser;
 import io.ylab.ticTacToeGame.parsers.gameParsers.GameXmlParser;
-import io.ylab.ticTacToeGame.parsers.gameParsers.XMLParser.XMLToGameParser;
 import lombok.NoArgsConstructor;
 
 import java.io.File;

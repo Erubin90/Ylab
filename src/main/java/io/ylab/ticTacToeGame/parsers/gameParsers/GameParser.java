@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.Format;
 
 @NoArgsConstructor
 public class GameParser implements Parser<Game> {

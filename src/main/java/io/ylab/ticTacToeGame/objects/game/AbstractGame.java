@@ -1,6 +1,5 @@
 package io.ylab.ticTacToeGame.objects.game;
 
-import io.ylab.ticTacToeGame.objects.players.AbstractPlayer;
 import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.*;
@@ -12,7 +11,10 @@ import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public abstract class AbstractGame implements Game {
 

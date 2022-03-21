@@ -1,7 +1,6 @@
 package io.ylab.ticTacToeGame.parsers.gameParsers;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import io.ylab.ticTacToeGame.model.GameAnswer;
 import io.ylab.ticTacToeGame.model.GamePlayModel;
 import io.ylab.ticTacToeGame.objects.game.Game;
 import io.ylab.ticTacToeGame.parsers.Parser;
