@@ -1,11 +1,12 @@
 package io.ylab.ticTacToeGame.controlers;
 
+import io.ylab.ticTacToeGame.exceptions.InvalidDataException;
+import io.ylab.ticTacToeGame.model.Response;
 import io.ylab.ticTacToeGame.objects.enums.FileFormat;
 import io.ylab.ticTacToeGame.parsers.gameParsers.GameParser;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -14,8 +15,8 @@ import java.io.IOException;
 @RequestMapping("/simulation/play")
 class SimulationController {
 
-    @PostMapping("/file")
-    public String processFile(@RequestBody MultipartFile answer) {
+    @PostMapping(value = "/file")
+    public Response processFile(@RequestBody MultipartFile answer) throws Exception {
         var fileName = answer.getOriginalFilename();
         if (fileName != null) {
             int index = fileName.lastIndexOf(".");
@@ -28,24 +29,24 @@ class SimulationController {
                     parser = new GameParser(fileFormat);
                     break;
                 default:
-                    return "Формат файла \""+ format +"\" не поддерживается";
+                    throw new InvalidDataException("Формат файла '" + format + "' не поддерживается");
             }
             String file;
             try {
                 file = new String(answer.getInputStream().readAllBytes());
             } catch (IOException e) {
-                return "Не получилось прочитать файл";
+                throw new InvalidDataException("Не получилось прочитать файл");
             }
             try {
                 var game = parser.read(file);
                 game.play();
             } catch (IOException e) {
-                return "Содержимое файла не соответствует шаблону";
+                throw new InvalidDataException("Содержимое файла не соответствует шаблону");
             }
         }
         else {
-            return "Тело не содержит файла";
+            throw new InvalidDataException("Тело не содержит файла");
         }
-        return "Игра воспроизвелась";
+        return new Response("Игра воспроизвелась");
     }
 }
