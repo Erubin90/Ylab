@@ -1,5 +1,6 @@
 package io.ylab.ticTacToeGame.objects.game;
 
+import io.ylab.ticTacToeGame.objects.Menu;
 import io.ylab.ticTacToeGame.objects.players.Bot;
 import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.Step;
@@ -10,21 +11,18 @@ import io.ylab.ticTacToeGame.repositories.PlayerLocalStorageRepository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
-public class PersonGame extends AbstractGame {
+public class PersonGame extends AbstractGame{
 
     private final PlayerLocalStorageRepository storage;
 
-    public PersonGame(Scanner scan, TypeGame typeGame) {
+    public PersonGame(TypeGame typeGame) {
         super();
-        this.scan = scan;
         this.typeGame = typeGame;
         this.scope = new HashMap<>();
         this.players = new ArrayList<>();
         this.steps = new ArrayList<>();
         this.storage = new PlayerLocalStorageRepository();
-
     }
 
     //Метод в котором прописана логика игры
@@ -37,13 +35,18 @@ public class PersonGame extends AbstractGame {
         end();
     }
 
+    @Override
+    public void newRound() {
+        this.matrix = new char[3][3];
+        this.steps = new ArrayList<>();
+    }
+
     /*
     Конфигурация игры:
     - создание игроков
     - выбор какой игрок будет Х, а какой О
      */
     private void configuration() {
-        boolean flag = true;
         Player player1;
         Player player2;
         
@@ -61,50 +64,32 @@ public class PersonGame extends AbstractGame {
         Message.printSeparator("-", countPattern);
 
         //Выбор какой игрок будет Х, а какой О
-        Message.printPlayerSetSymbol(player1, player2);
-        while (flag) {
-            String answer = scan.nextLine();
-            switch (answer) {
-                //player1 будет Х
-                case "1":
+        Button button = Menu.playerSetSymbol(player1, player2);
+        switch (button) {
+            //player1 будет Х
+            case ONE:
+                fillPlayersAndScope(player1, player2);
+                break;
+            //player2 будет Х
+            case TWO:
+                fillPlayersAndScope(player2, player1);
+                break;
+            //рандомно выберется игрок который будет Х
+            case THREE:
+                double index = Math.random() - 0.5;
+                if (index > 0)
                     fillPlayersAndScope(player1, player2);
-                    flag = false;
-                    break;
-                //player2 будет Х
-                case "2":
+                else
                     fillPlayersAndScope(player2, player1);
-                    flag = false;
-                    break;
-                //рандомно выберется игрок который будет Х
-                case "3":
-                    double index = Math.random() - 0.5;
-                    if (index > 0)
-                        fillPlayersAndScope(player1, player2);
-                    else
-                        fillPlayersAndScope(player2, player1);
-                    flag = false;
-                    break;
-                default:
-                    Message.printErrorAnswer();
-            }
+                break;
         }
     }
 
     private Player addPlayer(int num) {
         String standardName = "Player " + num;
         Message.printPlayerSetName(standardName);
-        Player player;
-        while (true) {
-            String name = scan.nextLine().replace("\t", "");
-            if (name.isEmpty() || name.equals("Bot")) {
-                Message.printErrorSetName();
-            }
-            else {
-                player = storage.get(name);
-                break;
-            }
-        }
-        return player;
+        String name = Menu.playerSetName();
+        return storage.get(name);
     }
 
     private Bot addBot() {
@@ -134,7 +119,7 @@ public class PersonGame extends AbstractGame {
         while (resultGame == ResultGame.NEXT_MOVE) {
             for (Player player : players) {
                 if (resultGame == ResultGame.NEXT_MOVE) {
-                    Step step = player.move(scan, matrix);
+                    Step step = player.move(matrix);
                     step.setNum(num);
                     steps.add(step);
                     int row = step.getRow();

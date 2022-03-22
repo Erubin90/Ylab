@@ -1,18 +1,14 @@
 package io.ylab.ticTacToeGame.objects.game;
 
 import io.ylab.ticTacToeGame.objects.Step;
-import io.ylab.ticTacToeGame.objects.enums.ContinueGame;
 import io.ylab.ticTacToeGame.objects.enums.TypeGame;
 import io.ylab.ticTacToeGame.objects.players.Player;
 
 import java.util.List;
-import java.util.Scanner;
 
 public interface Game {
 
     void play();
-
-    ContinueGame isContinueGame(Scanner scan);
 
     List<Player> getPlayers();
 
@@ -28,5 +24,14 @@ public interface Game {
 
     TypeGame getTypeGame();
 
-    String getInfoForTest();
+    void newRound();
+
+    //Для теста
+    default String getInfoForTest() {
+        return "Game{" +
+                "players=" + getPlayers() +
+                ", steps=" + getSteps() +
+                ", winPlayer=" + getWinPlayer() +
+                '}';
+    }
 }

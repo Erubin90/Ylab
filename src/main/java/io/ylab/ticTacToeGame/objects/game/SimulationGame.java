@@ -6,14 +6,12 @@ import io.ylab.ticTacToeGame.objects.enums.TypeGame;
 import io.ylab.ticTacToeGame.objects.players.Player;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class SimulationGame extends AbstractGame {
 
     public SimulationGame(List<Player> players, List<Step> steps, int sizeMatrix) {
         this.players = players;
         this.steps = steps;
-        this.scan = new Scanner(System.in);
         this.matrix = new char[sizeMatrix][sizeMatrix];
         this.typeGame = TypeGame.SIMULATION;
     }
@@ -22,7 +20,6 @@ public class SimulationGame extends AbstractGame {
         super();
         this.players = players;
         this.steps = steps;
-        this.scan = new Scanner(System.in);
         this.typeGame = TypeGame.SIMULATION;
     }
 
@@ -48,5 +45,10 @@ public class SimulationGame extends AbstractGame {
         }
         else
             Message.printDrawPlayers();
+    }
+
+    @Override
+    public void newRound() {
+
     }
 }

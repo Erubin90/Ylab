@@ -6,8 +6,6 @@ import io.ylab.ticTacToeGame.objects.enums.Symbol;
 import io.ylab.ticTacToeGame.objects.game.PersonGame;
 import io.ylab.ticTacToeGame.objects.enums.ResultGame;
 
-import java.util.Scanner;
-
 public class Bot extends AbstractPlayer {
 
     private Symbol opponentSymbol;
@@ -21,7 +19,7 @@ public class Bot extends AbstractPlayer {
     }
 
     @Override
-    public Step move(Scanner scanner, char[][] matrix) {
+    public Step move(char[][] matrix) {
         int bestVal = -1000;
         Step step = new Step(-1, -1, this);
         for (int row = 0; row < matrix.length; row++) {

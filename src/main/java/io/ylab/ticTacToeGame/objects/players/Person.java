@@ -1,15 +1,10 @@
 package io.ylab.ticTacToeGame.objects.players;
 
+import io.ylab.ticTacToeGame.objects.Menu;
 import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.Step;
 
-import java.util.Scanner;
-
 public class Person extends AbstractPlayer {
-
-    public Person() {
-        super();
-    }
 
     public Person(String name) {
         super(name);
@@ -20,12 +15,12 @@ public class Person extends AbstractPlayer {
     }
 
     @Override
-    public Step move(Scanner scanner, char[][] matrix) {
+    public Step move(char[][] matrix) {
         int row;
         int col;
         while (true) {
             Message.printPersonMove(name);
-            String stringMove = scanner.nextLine();
+            String stringMove = Menu.scanningString();
             if (stringMove.matches("[123]{2}")) {
                 String[] nums = stringMove.split("");
                 row = Integer.parseInt(nums[0]) - 1;

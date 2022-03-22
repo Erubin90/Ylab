@@ -3,13 +3,7 @@ package io.ylab.ticTacToeGame.objects.players;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.Symbol;
 
-import java.util.Scanner;
-
 public class Simulation extends AbstractPlayer {
-
-    public Simulation() {
-        super();
-    }
 
     public Simulation(String name) {
         super(name);
@@ -22,7 +16,7 @@ public class Simulation extends AbstractPlayer {
     }
 
     @Override
-    public Step move(Scanner scanner, char[][] matrix) {
+    public Step move(char[][] matrix) {
         return null;
     }
 

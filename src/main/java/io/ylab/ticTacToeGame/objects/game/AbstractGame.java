@@ -1,6 +1,5 @@
 package io.ylab.ticTacToeGame.objects.game;
 
-import io.ylab.ticTacToeGame.objects.Message;
 import io.ylab.ticTacToeGame.objects.Step;
 import io.ylab.ticTacToeGame.objects.enums.*;
 import io.ylab.ticTacToeGame.objects.players.Player;
@@ -11,10 +10,8 @@ import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public abstract class AbstractGame implements Game {
 
@@ -37,8 +34,6 @@ public abstract class AbstractGame implements Game {
     @Getter
     @Setter
     protected List<Step> steps;
-
-    protected Scanner scan;
 
     protected final int countPattern = 30;
 
@@ -101,44 +96,11 @@ public abstract class AbstractGame implements Game {
         return resultGame;
     }
 
-    /*
-    Спрашивает у игрока дальнейшие действия после окончания раунда:
-     */
-    public final ContinueGame isContinueGame(Scanner scan) {
-        while (true) {
-            String answer = scan.nextLine();
-            switch (answer) {
-                //Сыграть еще один раунд
-                case "1":
-                    matrix = new char[3][3];
-                    steps = new ArrayList<>();
-                    return ContinueGame.CONTINUE;
-                //Создать новую игру
-                case "2":
-                    return ContinueGame.NEW_GAME;
-                //Закончить игру
-                case "3":
-                    return ContinueGame.EXIT;
-                default:
-                    Message.printErrorAnswer();
-            }
-        }
-    }
-
     protected void saveGame(Directory directory, FileFormat... fileFormats) throws IOException {
         for (var formatFile : fileFormats) {
             File file = Creator.createFile(players, formatFile, directory);
             GameParser parser = new GameParser(formatFile);
             parser.write(this, file);
         }
-    }
-
-    //Для теста
-    public String getInfoForTest() {
-        return "Game{" +
-                "players=" + players +
-                ", steps=" + steps +
-                ", winPlayer=" + winPlayer +
-                '}';
     }
 }
